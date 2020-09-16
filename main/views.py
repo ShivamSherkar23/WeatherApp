@@ -8,8 +8,7 @@ def index(request):
         city = request.POST['city']
 
         source = urllib.request.urlopen(
-            'http://api.openweathermap.org/data/2.5/weather?q ='
-            + city + '&appid = 00b9204d381eebe0caf5d86e632316b5').read()
+            'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=00b9204d381eebe0caf5d86e632316b5').read()
 
         # converting JSON data to a dictionary
         list_of_data = json.loads(source)
@@ -19,7 +18,7 @@ def index(request):
             "country_code": str(list_of_data['sys']['country']),
             "coordinate": str(list_of_data['coord']['lon']) + ' '
             + str(list_of_data['coord']['lat']),
-            "temp": str(list_of_data['main']['temp']) + 'k',
+            "temp": str(list_of_data['main']['temp']-273.15) + '°C',
             "pressure": str(list_of_data['main']['pressure']),
             "humidity": str(list_of_data['main']['humidity']),
         }
